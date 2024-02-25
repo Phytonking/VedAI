@@ -12,7 +12,7 @@
                     <h3 class="fw-bold">Get a new Solution</h3>
                     <p class="fw-bold text-success mb-2">Describe the medical issue.....</p>
                     
-                    <form class="text-center" method="post" action="{% url 'web:newSolution' %}">
+                    <form class="text-center" method="post" action="{% url 'web:newSolution' %}" id = "myForm">
                         {% csrf_token %}
                         <div class="mb-3">
                             <textarea class="form-control" type="text" name="question" placeholder="Describe the problem...." cols="50", rows="10" fixed></textarea>
@@ -22,5 +22,55 @@
                 </div>
             </div>
         </div>
+        <div id="loading-screen" class="hidden" style="display: none;" class="text-center mx-auto">
+            <div style='margin-top: 10%'>
+                <img src="{% static 'web/img/loading.gif' %}" alt="Loading...">
+                <p  >Please wait while processing...</p>
+            </div>
+        </div>
+        <style>
+            #loading-screen {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.5);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                z-index: 999; /* Ensure it's above other elements */
+                }
+
+                #loading-screen img {
+                width: 100px;
+                }
+
+                #loading-screen p {
+                margin-top: 10px;
+                font-size: 16px;
+                }
+
+                .hidden {
+                display: none;
+                }
+
+        </style>
+        <script>
+            const form = document.getElementById("myForm");
+            const loadingScreen = document.getElementById("loading-screen");
+
+            form.addEventListener("submit", (event) => {
+                //event.preventDefault(); // Prevent default form submission
+                loadingScreen.style.display = "block"; // Show loading screen
+                /*
+                // Simulate some processing time (replace with your actual logic)
+                setTimeout(() => {
+                    loadingScreen.classList.add("hidden"); // Hide loading screen
+                    // Submit the form or perform any actions after completion
+                }, 2000);
+                */
+            });
+        </script>
     </section>
 {% endblock %}
