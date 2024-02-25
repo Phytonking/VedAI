@@ -1,0 +1,49 @@
+{% extends 'web/layout.html' %}
+
+{% block title %}
+    VedRX - Solution
+{% endblock %}
+
+{% block body %}
+    <div></div>
+    <div class="container">
+        <section class="position-relative py-4 py-xl-5">
+            <div class="container">
+                <div class="row mb-5">
+                    <div class="col-md-8 col-xl-6 text-center mx-auto">
+                        <h2 class="w-lg-50">Solution</h2>
+                        <a href="{% url 'web:dashboard' %}"><p class="w-lg-50">Head back to DashBoard</p></a>
+                        <a class="btn btn-primary shadow" role="button" href="{% url 'web:delSol' sol.sol_id %}">Delete Solution</a>
+                    </div>
+                </div>
+                <div class="row mb-5">
+                    <div class="col-md-8 col-xl-6 text-center mx-auto">
+                        <h2 class="w-lg-50">Current Remedy</h2>
+                        {% if sol.solution_type == 'PIL' %}
+                        <h4 class="w-lg-50">Solution Type: Pill</h4>
+                        {% elif sol.solution_type == 'LOT' %}
+                        <h4 class="w-lg-50">Solution Type: Lotion</h4>
+                        {% elif sol.solution_type == 'CHE' %}
+                        <h4 class="w-lg-50">Solution Type: Chewable</h4>
+                        {% elif sol.solution_type == 'CIG' %}
+                        <h4 class="w-lg-50">Solution Type: Cigarette</h4>
+                        {% endif %}
+                        <p>Quantity: {{sol.quantity}}</p>
+                        <hr>
+                        <h4 class="w-lg-50">Ingredients</h4>
+                        {% for k in ing %} 
+                            <div class="card-body d-flex flex-column align-items-center" style="border: 2px solid white;">
+                                <p><strong>{{k.ingredientName}}</strong> - {{k.milligrams}} mg per unit</p>
+                                <p>{{k.description}}</p>
+                                <hr>
+                            </div>
+
+                        {% endfor %}
+                    </div>
+                </div>
+                <!--past remedies-->
+                
+            </div>
+        </section>
+    </div>
+{% endblock %}

@@ -1,0 +1,56 @@
+{% extends 'web/layout.html' %}
+
+{% block title %}
+    VedRX - Dashboard
+{% endblock %}
+
+
+{% block body %}
+    <div></div>
+    <div class="container">
+        <section class="position-relative py-4 py-xl-5">
+            <div class="container">
+                <div class="row mb-5">
+                    <div class="col-md-8 col-xl-6 text-center mx-auto">
+                        <h2 class="w-lg-50">Dashboard</h2>
+                    </div>
+                </div>
+                <div class="row d-flex justify-content-center">
+                    <div class="col-md-6 col-xl-4">
+                        <div class="card mb-5">
+                            <div class="card-body d-flex flex-column align-items-center">
+                                <div class="mb-3"><a href="{% url 'web:newSolution' %}"><button class="btn btn-primary d-block w-100" type="submit">Get a new Solution</button></a></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="row mb-5">
+                    
+                    <div class="col-md-8 col-xl-6 text-center mx-auto">
+                        <h2 class="w-lg-50">Past Remedies</h2>
+                        {% for k in remedies %} 
+                            <a href="{% url 'web:solution' k.sol_id %}">
+                                <div class="card-body d-flex flex-column align-items-center" style="border: 2px solid white; margin: 20px;">
+                                    <p>Id: {{k.sol_id}}</p>
+                                    <p>For Problem: {{k.for_problem.problem_statement}}</p>
+                                    {% if k.solution_type == 'PIL' %}
+                                    <p class="w-lg-50">Solution Type: Pill</p>
+                                    {% elif k.solution_type == 'LOT' %}
+                                    <p class="w-lg-50">Solution Type: Lotion</p>
+                                    {% elif k.solution_type == 'CHE' %}
+                                    <p class="w-lg-50">Solution Type: Chewable</p>
+                                    {% elif k.solution_type == 'CIG' %}
+                                    <p class="w-lg-50">Solution Type: Cigarette</p>
+                                    {% endif %}
+                                </div>
+                            </a>
+                        {% endfor %}
+                    </div>
+                </div>
+                <!--past remedies-->
+                
+            </div>
+        </section>
+    </div>
+{% endblock %}

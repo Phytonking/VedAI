@@ -1,0 +1,28 @@
+{% extends 'web/layout.html' %}
+
+{% block title %}
+    VedRX - Questions
+{% endblock %}
+
+{% block body %}
+    <section class="py-5">
+        <div class="container py-5">
+            <div class="row mb-4 mb-lg-5">
+                <div class="col-md-8 col-xl-6 text-center mx-auto">
+                    <h3 class="fw-bold">Here are some extra questions</h3>
+                    <p class="fw-bold text-success mb-2">Answer them so we can understand your needs....</p>
+                    <form class="text-center" method="post" action="{% url 'web:questions' session %}">
+                        {% csrf_token %}
+                        {% for l in questions %}
+                            <h4 class="fw-bold">{{l.question}}</h4>
+                            <div class="mb-3">
+                                <textarea class="form-control" type="text" name="{{l.question_id}}" placeholder="Your answer....." cols="50", rows="10" fixed></textarea>
+                            </div>
+                        {% endfor %}
+                        <div class="mb-3"><button class="btn btn-primary d-block w-100" type="submit">Submit</button></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
